@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className='bg-white dark:bg-zinc-800'>
+    <html  lang="en" suppressHydrationWarning>
+      <body className="bg-zinc-300 dark:bg-zinc-800 text-black dark:text-white h-screen">
         <ThemeProvider
         attribute="class"
         defaultTheme="system"

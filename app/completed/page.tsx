@@ -4,7 +4,7 @@ export default function CompletedTasksPage() {
   return (
     <>
     <Layout>
-      <div className="flex">
+      <div className="flex text-black dark:text-white">
         <main className="flex-1 p-6">
           <h1 className="text-2xl font-bold mb-4">Completed Tasks</h1>
           <p>Welcome to your completed tasks.</p>
