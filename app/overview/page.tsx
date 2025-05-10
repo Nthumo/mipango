@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from "react";
-
+import { Task, TaskList } from '../types';
 import Layout from "../components-mipango/layout";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Star, StarOff } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -16,17 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 import AddTaskForm from "../components-mipango/addtaskform";
 
-type Task = {
-  id: string;
-  content: string;
-  completed: boolean;
-};
-
-type TaskList = {
-  id: string;
-  title: string;
-  tasks: Task[];
-};
 
 export default function OverViewPage() {
   const [taskLists, setTaskLists] = useState<TaskList[]>([]);
@@ -57,10 +46,26 @@ export default function OverViewPage() {
                   id: crypto.randomUUID(),
                   content,
                   completed: false,
+                  starred: false,
                 },
               ],
             }
           : list
+      )
+    );
+  };
+
+  const toggleStar = (listId: string, taskId: string) => {
+    setTaskLists(prev =>
+      prev.map(list =>
+        list.id === listId
+        ? {
+          ...list,
+          tasks: list.tasks.map(task =>
+            task.id === taskId ? { ...task, starred: !task.starred } : task
+          ),
+        }
+        : list
       )
     );
   };
@@ -120,6 +125,9 @@ export default function OverViewPage() {
                         onChange={() => toggleComplete(list.id, task.id)}
                       />
                       <span>{task.content}</span>
+                      <button onClick={() => toggleStar(list.id, task.id)}>
+                        {task.starred ? <Star/> : <StarOff/>}
+                      </button>
                     </li>
                   ))}
               </ul>
