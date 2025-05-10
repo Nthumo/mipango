@@ -90,7 +90,10 @@ export default function OverViewPage() {
     <Layout>
 
       {/* Task Lists Display */}
-      <CreateListModal onCreate={createTaskList}/>
+      <div className="flex justify-between">
+        
+        <CreateListModal onCreate={createTaskList}/>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {taskLists.map(list => (
           <Card key={list.id}>

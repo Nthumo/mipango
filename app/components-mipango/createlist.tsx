@@ -33,7 +33,7 @@ export default function CreateListModal({ onCreate }: Props) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>
-          <Plus className="mr-2" />
+          <Plus className="md:mr-2" />
           Create List
         </Button>
       </DialogTrigger>
@@ -45,6 +45,7 @@ export default function CreateListModal({ onCreate }: Props) {
           placeholder="Enter list name"
           value={listTitle}
           onChange={e => setListTitle(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleCreate()}
         />
         <DialogFooter>
           <Button onClick={handleCreate}>Create</Button>
