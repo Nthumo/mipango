@@ -19,9 +19,6 @@ const navItems = [
   { label: 'Completed', path: 'completed', icon: CircleCheckBig },
 ];
 
-const bottomItems = [
-  { label: 'Settings', path: '/settings', icon: Settings },
-];
 
 export default function Sidebar({ collapsed }: { collapsed: boolean }) {
   const router = useRouter();
@@ -34,7 +31,7 @@ export default function Sidebar({ collapsed }: { collapsed: boolean }) {
     <>
 
       <aside
-        className={` border-r flex flex-col justify-between shadow transition-all duration-300${collapsed ? 'w-20' : 'w-64'
+        className={`bg-zinc-300 dark:bg-zinc-950 flex flex-col justify-between shadow transition-all duration-300${collapsed ? 'w-20' : 'w-64'
           }`}
       >
         <div className="flex flex-col justify-between h-screen text-black dark:text-white">
@@ -49,25 +46,7 @@ export default function Sidebar({ collapsed }: { collapsed: boolean }) {
                   className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-zinc-700 transition ${isActive ? 'bg-zinc-900 text-green-500 font-semibold' : ''
                     }`}
                 >
-                  <Icon />
-                  {!collapsed && <span>{item.label}</span>}
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* Bottom Nav Items */}
-          <nav className="space-y-2 mb-4">
-            <hr className="border-gray-700" />
-            {bottomItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.path}
-                  onClick={() => handleNavigation(item.path)}
-                  className="w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-zinc-700 transition"
-                >
-                  <Icon />
+                  {!collapsed && <Icon className='w-5 h-5' />}
                   {!collapsed && <span>{item.label}</span>}
                 </button>
               );
@@ -76,6 +55,5 @@ export default function Sidebar({ collapsed }: { collapsed: boolean }) {
         </div>
       </aside>
     </>
-
   );
 }
