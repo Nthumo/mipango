@@ -111,7 +111,7 @@ export default function OverViewPage() {
               <CardTitle>{list.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <AddTaskForm onAdd={content => addTask(list.id, content)} />
+            <AddTaskForm onAdd={content => addTask(list.id, content)} />
 
               {/* Incomplete Tasks */}
               <ul className="space-y-2 mt-2">

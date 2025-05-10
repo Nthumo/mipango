@@ -1,16 +1,17 @@
+'use client'
+import { useState } from "react";
+
 import Layout from "../components-mipango/layout";
+import CompletedTasks from "../components-mipango/completed";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function CompletedTasksPage() {
+  const [taskLists, setTaskLists] = useState([]);
+
   return (
     <>
     <Layout>
-      <div className="flex text-black dark:text-white">
-        <main className="flex-1 p-6">
-          <h1 className="text-2xl font-bold mb-4">Completed Tasks</h1>
-          <p>Welcome to your completed tasks.</p>
-        </main>
-      </div>
+      <CompletedTasks taskLists={taskLists}/>
     </Layout>
     </>
   );
