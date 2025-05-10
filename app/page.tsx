@@ -1,5 +1,5 @@
 import Sidebar from "./components-mipango/navigation";
-import AllTasksPage from "./all-tasks/page";
+import AllTasksPage from "./starred/page";
 import DashboardPage from "./overview/page";
 
 
