@@ -15,23 +15,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import AddTaskForm from "../components-mipango/addtaskform";
+import CreateListModal from "../components-mipango/createlist";
 
 
 export default function OverViewPage() {
   const [taskLists, setTaskLists] = useState<TaskList[]>([]);
-  const [newListTitle, setNewListTitle] = useState('');
 
-  const createTaskList = () => {
-    if (!newListTitle.trim()) return;
-
-    const newList: TaskList = {
-      id: crypto.randomUUID(),
-      title: newListTitle.trim(),
-      tasks: [],
-    };
-    setTaskLists(prev => [...prev, newList]);
-    setNewListTitle('');
-  };
 
   const addTask = (listId: string, content: string) => {
     if (!content.trim()) return;
@@ -87,23 +76,21 @@ export default function OverViewPage() {
     );
   };
 
+  const createTaskList = (title: string) => {
+    const newList: TaskList = {
+      id: crypto.randomUUID(),
+      title,
+      tasks: [],
+    };
+    setTaskLists(prev => [...prev, newList]);
+  };
+  
+
   return (
     <Layout>
-      {/* Button to create new list */}
-      <div className="flex items-center gap-2 mt-4">
-        <Input
-          value={newListTitle}
-          onChange={e => setNewListTitle(e.target.value)}
-          placeholder="New list title..."
-          className="max-w-sm text-black"
-        />
-        <Button onClick={createTaskList}>
-          <Plus className="mr-2 h-4 w-4" />
-          Create
-        </Button>
-      </div>
 
       {/* Task Lists Display */}
+      <CreateListModal onCreate={createTaskList}/>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {taskLists.map(list => (
           <Card key={list.id}>
