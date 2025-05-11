@@ -15,7 +15,7 @@ export default function Header({ onToggle }: { onToggle: () => void}) {
 
     return(
         <>
-        <header className='flex justify-between h-[55px] light:bg-zinc-200'>
+        <header className='fixed w-full flex justify-between h-[55px] bg-zinc-200 dark:bg-zinc-800 border-b'>
             <div className='flex gap-8 ml-4 mt-2'>
                 <Menu onClick={onToggle} className='text-black dark:text-white h-[20px] w-[25px] md:h-[40px] md:w-[30px] '/>
                 <div className='flex gap-2 items-center'>

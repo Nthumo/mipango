@@ -18,6 +18,7 @@ import AddTaskForm from "../components-mipango/addtaskform";
 import CreateListModal from "../components-mipango/createlist";
 
 
+
 export default function OverViewPage() {
   const [taskLists, setTaskLists] = useState<TaskList[]>([]);
 
@@ -28,17 +29,17 @@ export default function OverViewPage() {
       prev.map(list =>
         list.id === listId
           ? {
-              ...list,
-              tasks: [
-                ...list.tasks,
-                {
-                  id: crypto.randomUUID(),
-                  content,
-                  completed: false,
-                  starred: false,
-                },
-              ],
-            }
+            ...list,
+            tasks: [
+              ...list.tasks,
+              {
+                id: crypto.randomUUID(),
+                content,
+                completed: false,
+                starred: false,
+              },
+            ],
+          }
           : list
       )
     );
@@ -48,13 +49,13 @@ export default function OverViewPage() {
     setTaskLists(prev =>
       prev.map(list =>
         list.id === listId
-        ? {
-          ...list,
-          tasks: list.tasks.map(task =>
-            task.id === taskId ? { ...task, starred: !task.starred } : task
-          ),
-        }
-        : list
+          ? {
+            ...list,
+            tasks: list.tasks.map(task =>
+              task.id === taskId ? { ...task, starred: !task.starred } : task
+            ),
+          }
+          : list
       )
     );
   };
@@ -64,13 +65,13 @@ export default function OverViewPage() {
       prev.map(list =>
         list.id === listId
           ? {
-              ...list,
-              tasks: list.tasks.map(task =>
-                task.id === taskId
-                  ? { ...task, completed: !task.completed }
-                  : task
-              ),
-            }
+            ...list,
+            tasks: list.tasks.map(task =>
+              task.id === taskId
+                ? { ...task, completed: !task.completed }
+                : task
+            ),
+          }
           : list
       )
     );
@@ -84,59 +85,71 @@ export default function OverViewPage() {
     };
     setTaskLists(prev => [...prev, newList]);
   };
-  
+
 
   return (
+
     <Layout>
-
       {/* Task Lists Display */}
-      <div className="flex justify-between">
-        
-        <CreateListModal onCreate={createTaskList}/>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-        {taskLists.map(list => (
-          <Card key={list.id}>
-            <CardHeader>
-              <CardTitle>{list.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-            <AddTaskForm onAdd={content => addTask(list.id, content)} />
+      <div className="mt-12 ">
+        <Card className="p-2">
+          <div className="flex justify-between">
+            <h1 className="text-black dark:text-white text-xl font-bold">WELCOME🤗</h1>
+            {taskLists.length === 0 ? (
+              <p className="italic">Create your first tasks list😉 👉</p>
+            ): (
+              <p className="italic">Plan your life like a pro🧑‍🔬</p>
+            )}
+            <CreateListModal onCreate={createTaskList} />
+          </div>
+        </Card>
 
-              {/* Incomplete Tasks */}
-              <ul className="space-y-2 mt-2">
-                {list.tasks
-                  .filter(task => !task.completed)
-                  .map(task => (
-                    <li key={task.id} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={task.completed}
-                        onChange={() => toggleComplete(list.id, task.id)}
-                      />
-                      <span>{task.content}</span>
-                      <button onClick={() => toggleStar(list.id, task.id)}>
-                        {task.starred ? <Star/> : <StarOff/>}
-                      </button>
-                    </li>
-                  ))}
-              </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 overflow-auto">
+          {taskLists.map(list => (
+            <Card key={list.id}>
+              <CardHeader>
+                <CardTitle>{list.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <AddTaskForm onAdd={content => addTask(list.id, content)} />
 
-              {/* Completed Tasks */}
-              <details className="mt-4">
-                <summary className="text-zinc-500 cursor-pointer">Completed</summary>
-                <ul className="text-sm text-zinc-400 mt-2 space-y-1">
+                {/* Incomplete Tasks */}
+                <ul className="space-y-2 mt-2">
                   {list.tasks
-                    .filter(task => task.completed)
+                    .filter(task => !task.completed)
                     .map(task => (
-                      <li key={task.id}>{task.content}</li>
+                      <li key={task.id} className="flex items-center gap-2">
+                        <input
+                          type="checkbox"
+                          checked={task.completed}
+                          onChange={() => toggleComplete(list.id, task.id)}
+                        />
+                        <span>{task.content}</span>
+                        <button onClick={() => toggleStar(list.id, task.id)}>
+                          {task.starred ? <Star /> : <StarOff />}
+                        </button>
+                      </li>
                     ))}
                 </ul>
-              </details>
-            </CardContent>
-          </Card>
-        ))}
+
+                {/* Completed Tasks */}
+                <details className="mt-4">
+                  <summary className="text-zinc-500 cursor-pointer">Completed</summary>
+                  <ul className="text-sm text-zinc-400 mt-2 space-y-1">
+                    {list.tasks
+                      .filter(task => task.completed)
+                      .map(task => (
+                        <li key={task.id}>{task.content}</li>
+                      ))}
+                  </ul>
+                </details>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </Layout>
+
+
   );
 }
