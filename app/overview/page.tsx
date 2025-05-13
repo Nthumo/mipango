@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Task, TaskList } from '../types';
 import Layout from "../components-mipango/layout";
 import { Button } from "@/components/ui/button";
-import { Plus, Star, StarOff } from "lucide-react";
+import { Plus, Star, Trash } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -91,22 +91,23 @@ export default function OverViewPage() {
 
     <Layout>
       {/* Task Lists Display */}
-      <div className="mt-12 ">
+      <div className="mt-12 overflow-y-auto">
         <Card className="p-2">
           <div className="flex justify-between">
-            <h1 className="text-black dark:text-white text-xl font-bold">WELCOME🤗</h1>
+            <h1 className="text-black dark:text-white text-[14px] md:text-xl font-bold">WELCOME🤗</h1>
+            <br />
             {taskLists.length === 0 ? (
-              <p className="italic">Create your first tasks list😉 👉</p>
-            ): (
-              <p className="italic">Plan your life like a pro🧑‍🔬</p>
+              <p className="italic hidden md:block text-[16px]">Create your first tasks list😉 👉</p>
+            ) : (
+              <p className="italic hidden md:block">Plan your life like a pro🧑‍🔬</p>
             )}
             <CreateListModal onCreate={createTaskList} />
           </div>
         </Card>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 overflow-auto">
+        <div className="grid grid-cols-3 gap-4 mt-6">
           {taskLists.map(list => (
-            <Card key={list.id}>
+            <Card key={list.id} className="h-screen w-[400px] overflow-y-auto">
               <CardHeader>
                 <CardTitle>{list.title}</CardTitle>
               </CardHeader>
@@ -118,7 +119,7 @@ export default function OverViewPage() {
                   {list.tasks
                     .filter(task => !task.completed)
                     .map(task => (
-                      <li key={task.id} className="flex items-center gap-2">
+                      <li key={task.id} className="flex justify-between items-center gap-2">
                         <input
                           type="checkbox"
                           checked={task.completed}
@@ -126,8 +127,13 @@ export default function OverViewPage() {
                         />
                         <span>{task.content}</span>
                         <button onClick={() => toggleStar(list.id, task.id)}>
-                          {task.starred ? <Star /> : <StarOff />}
+                          {task.starred ? <Star className="bg-green-700" /> : <Star />}
                         </button>
+                        <div className="flex justify-between">
+                          <Button>
+                            <Trash className="bg-transparent" />
+                          </Button>
+                        </div>
                       </li>
                     ))}
                 </ul>

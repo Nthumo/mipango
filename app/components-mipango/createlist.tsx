@@ -32,9 +32,9 @@ export default function CreateListModal({ onCreate }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className='hover:cursor bg-green-400 hover:bg-green-500'>
-          <Plus className="md:mr-2" />
-          Create List
+        <Button className=' bg-green-400 hover:bg-green-500 '>
+          <Plus className="md:mr" />
+           <span className='block md:hidden'>Add</span> <span className='hidden md:block'>Create</span> List
         </Button>
       </DialogTrigger>
       <DialogContent>
