@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import CreateTask from './createtask';
 import { Button } from '@/components/ui/button';
-import { Span } from 'next/dist/trace';
 
 const navItems = [
 
@@ -22,7 +21,6 @@ const navItems = [
   { label: 'Starred', path: 'starred', icon: Star },
   { label: 'Completed', path: 'completed', icon: CircleCheckBig },
 ];
-
 
 export default function Sidebar({ collapsed }: { collapsed: boolean }) {
   const router = useRouter();
@@ -41,7 +39,7 @@ export default function Sidebar({ collapsed }: { collapsed: boolean }) {
           <div>
             {!collapsed &&
               <span>
-                <CreateTask/>
+                <CreateTask />
               </span>}
           </div>
           <nav className="space-y-2 mt-4">

@@ -1,7 +1,6 @@
 'use client'
 
 import { Task, TaskList } from '../types';
-import Layout from "../components-mipango/layout";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 type Props = {

@@ -37,7 +37,7 @@ export default function CreateTask() {
                 <Input
                 placeholder='Enter task description'
                 />
-                <DialogFooter>
+                <DialogFooter className='flex justify-center'>
                     <Button>Submit</Button>
                 </DialogFooter>
             </DialogContent>
