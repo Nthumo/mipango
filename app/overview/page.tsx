@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import AddTaskForm from "../components-mipango/addtaskform";
+import CreateTask from "../components-mipango/createtask";
 import CreateListModal from "../components-mipango/createlist";
 
 
@@ -112,7 +113,7 @@ export default function OverViewPage() {
                 <CardTitle>{list.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <AddTaskForm onAdd={content => addTask(list.id, content)} />
+                <CreateTask />
 
                 {/* Incomplete Tasks */}
                 <ul className="space-y-2 mt-2">
