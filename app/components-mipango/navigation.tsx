@@ -32,7 +32,7 @@ export default function Sidebar({ collapsed }: { collapsed: boolean }) {
   return (
     <>
       <aside
-        className={`bg-zinc-300 dark:bg-zinc-950 mt-14 transition-all duration-300 p-2${collapsed ? 'w-2' : 'w-64'
+        className={`bg-zinc-300 dark:bg-zinc-800 mt-14 transition-all duration-300 p-2${collapsed ? 'w-2' : 'w-64'
           }`}
       >
         <div className="flex flex-col justify-between text-black dark:text-white p-2">
